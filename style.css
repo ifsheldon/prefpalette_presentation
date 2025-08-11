@@ -925,6 +925,11 @@ select.form-control {
   margin-bottom: var(--space-32);
 }
 
+/* Spacing below the Data card in Method tab */
+#data {
+  margin-bottom: var(--space-24);
+}
+
 .stage-container {
   display: flex;
   align-items: center;

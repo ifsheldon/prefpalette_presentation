@@ -109,6 +109,23 @@
                     <p class="section-subtitle">Two-stage framework for preference modeling</p>
                 </div>
 
+                <!-- Data Section -->
+                <div class="card" id="data">
+                    <div class="card__header">
+                        <h3>Data</h3>
+                    </div>
+                    <div class="card__body">
+                        <p>This work models community-conditioned preferences using text from online communities and synthesized counterfactuals for attributes.</p>
+                        <ul>
+                            <li><strong>Sources</strong>: 45 Reddit communities spanning scholarly, support, and conflict-oriented groups.</li>
+                            <li><strong>Instance structure</strong>: community-context plus candidate responses; learning targets are community-specific preferences over candidate responses.</li>
+                            <li><strong>Attributes</strong>: 19 total across two groups — Sociolinguistic Norms and Schwartz Cultural Values. Attribute predictors are trained using <a href="counterfactual.html">Counterfactual Attribute Synthesis</a>.</li>
+                            <li><strong>Learning signal</strong>: community-specific attention weights over attributes learned in <a href="attention.html">Attention-based Preference Modeling</a>.</li>
+                            <li><strong>Evaluation</strong>: accuracy on in-domain communities and generalization to held-out communities.</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="method-overview">
                     <div class="card">
                         <div class="card__header">
@@ -178,7 +195,7 @@
                             <h3>Multi-Attribute Decision Making</h3>
                         </div>
                         <div class="card__body">
-                            <p>The framework learns to dynamically weight different attributes based on community context, allowing for nuanced preference modeling that goes beyond simple user clustering.</p>
+                            <p>The model learns to dynamically weight different attributes based on context, allowing for nuanced preference modeling beyond simple user clustering.</p>
                             <ul>
                                 <li>Community-specific attention weights</li>
                                 <li>Dynamic attribute combination</li>
@@ -376,20 +393,6 @@
 
                     <div class="card">
                         <div class="card__header">
-                            <h3>Ethical Considerations</h3>
-                        </div>
-                        <div class="card__body">
-                            <ul>
-                                <li><strong>Bias Amplification:</strong> Could personalized visualizations reinforce existing biases?</li>
-                                <li><strong>Filter Bubbles:</strong> Risk of creating isolated information experiences</li>
-                                <li><strong>Privacy:</strong> Preference data reveals personal and community characteristics</li>
-                                <li><strong>Fairness:</strong> Ensuring all communities receive high-quality visualizations</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
                             <h3>Future Research Directions</h3>
                         </div>
                         <div class="card__body">
@@ -397,10 +400,6 @@
                                 <div class="direction-item">
                                     <h4>Cross-Modal Preference Transfer</h4>
                                     <p>Can text preferences inform visualization preferences?</p>
-                                </div>
-                                <div class="direction-item">
-                                    <h4>Multi-Stakeholder Preferences</h4>
-                                    <p>Balancing preferences when multiple communities view the same visualization</p>
                                 </div>
                                 <div class="direction-item">
                                     <h4>Dynamic Preference Learning</h4>
