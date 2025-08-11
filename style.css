@@ -753,6 +753,14 @@ select.form-control {
   color: var(--color-text);
 }
 
+.external-link {
+  margin-left: 8px;
+  font-size: 0.8em;
+  text-decoration: none;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
 .subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
