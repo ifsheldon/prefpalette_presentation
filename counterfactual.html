@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counterfactual Attribute Synthesis — PrefPalette</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script>
+  <style>
+    .hero { text-align:center; padding: var(--space-24) 0; background: var(--color-bg-1); border-radius: var(--radius-lg); margin: var(--space-24) 0; }
+    .content-narrow { max-width: 820px; margin: 0 auto; }
+    .backbar { display:flex; justify-content: space-between; align-items: center; margin: var(--space-24) 0; }
+    .prose h3 { margin: 16px 0; font-size: var(--font-size-xl); }
+    .prose p { color: var(--color-text-secondary); }
+    .prose ul { margin: 0 0 var(--space-16) 1.25rem; }
+    .callout { background: var(--color-bg-2); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-16); }
+    .codeblock { font-family: var(--font-family-mono); background: var(--color-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-16); }
+  </style>
+</head>
+<body>
+  <div class="container content-narrow">
+    <div class="backbar">
+      <a class="btn btn--outline" href="index.html?tab=method">← Back to Method</a>
+      <a class="btn btn--primary" href="index.html">Home</a>
+    </div>
+
+    <header class="hero">
+      <h1>Counterfactual Attribute Synthesis</h1>
+      <p class="section-subtitle">Training specialized attribute predictors with controlled generations</p>
+    </header>
+
+    <section class="card prose">
+      <div class="card__header"><h3>Purpose</h3></div>
+      <div class="card__body">
+        <ul>
+          <li>Train <strong>specialized attribute predictors</strong> for each attribute (e.g., humor, formality) without relying on noisy real-world labels.</li>
+          <li>
+            Overcome issues such as:
+            <ul>
+              <li>Confounds</li>
+              <li>Inconsistent or biased annotation</li>
+              <li>Ambiguous scalar ratings</li>
+              <li>Underrepresented attribute combinations</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card prose">
+      <div class="card__header"><h3>How It Works</h3></div>
+      <div class="card__body">
+        <ol>
+          <li>
+            <strong>Pick an attribute dimension</strong> (e.g., Formality)
+          </li>
+          <li>
+            <strong>Generate controlled variations (counterfactuals)</strong><br/>
+            Use a strong teacher LM (e.g., Llama 3 405B) to rewrite a given text into versions that differ only in the target attribute, while keeping the semantic content the same. Example levels for Formality:
+            <div class="callout" style="margin-top: 8px;">
+              <ul>
+                <li>Extremely casual</li>
+                <li>Somewhat casual</li>
+                <li>Neutral</li>
+                <li>Somewhat formal</li>
+                <li>Extremely formal</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <strong>Preserve all other attributes</strong><br/>
+            When adjusting one attribute, keep others constant to isolate causality:
+            <div class="codeblock">\[
+              s(y_{a,l}) \approx s(y),\quad A_a(y_{a,l}) \approx l,\quad A_k(y_{a,l}) \approx A_k(y) \; \forall k \neq a
+            \]</div>
+          </li>
+          <li>
+            <strong>Form paired training data</strong><br/>
+            Create pairs like (Somewhat formal) vs (Extremely formal) for the same base text to yield a known ordering along the target attribute.
+          </li>
+          <li>
+            <strong>Contrastive Attribute Distillation</strong><br/>
+            Train a smaller, specialized attribute predictor (e.g., Llama 3 1B) to mimic the teacher’s discrimination between attribute levels. Attribute loss:
+            <div class="codeblock">\[
+              L_{attr} = -\log \sigma\big(r_a(y_{a,l_2}) - r_a(y_{a,l_1})\big), \quad l_2 > l_1
+            \]</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card prose">
+      <div class="card__header"><h3>Advantages</h3></div>
+      <div class="card__body">
+        <ul>
+          <li><strong>Removes confounds</strong> — only the target attribute varies.</li>
+          <li><strong>Covers full attribute range</strong> — including rare cases absent in natural data.</li>
+          <li><strong>No human rating needed</strong> — supervision comes from controlled generation.</li>
+          <li><strong>Scalable</strong> — can be done for many attributes efficiently.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="backbar">
+      <a class="btn btn--outline" href="index.html?tab=method">← Back to Method</a>
+      <a class="btn btn--primary" href="index.html">Home</a>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

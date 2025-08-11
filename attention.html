@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attention-based Preference Modeling — PrefPalette</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script>
+  <style>
+    .attention-hero { text-align: center; padding: var(--space-24) 0; background: var(--color-bg-2); border-radius: var(--radius-lg); margin: var(--space-24) 0; }
+    .breadcrumbs { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-16); }
+    .content-narrow { max-width: 820px; margin: 0 auto; }
+    .kpi { display:flex; gap: var(--space-16); flex-wrap: wrap; margin: var(--space-16) 0; }
+    .kpi .card { flex: 1; min-width: 220px; }
+    .inline-badge { display:inline-block; padding: 2px 8px; border-radius: var(--radius-full); background: var(--color-secondary); font-size: var(--font-size-xs); margin-left: 6px; }
+    .matrix { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: var(--space-16); }
+    .backbar { display:flex; justify-content: space-between; align-items: center; margin: var(--space-24) 0; }
+  </style>
+</head>
+<body>
+  <div class="container content-narrow">
+    <div class="backbar">
+      <a class="btn btn--outline" href="index.html?tab=method">← Back to Method</a>
+      <a class="btn btn--primary" href="index.html">Home</a>
+    </div>
+
+    <header class="attention-hero">
+      <h1>Attention-based Preference Modeling</h1>
+      <p class="section-subtitle">Learning community-specific weights over interpretable attributes</p>
+    </header>
+
+    <section class="card">
+      <div class="card__header"><h3>Concept</h3></div>
+      <div class="card__body">
+        <p>The model represents each candidate response by its attribute vector \(a\) (e.g., formality, humor, empathy). For a community \(c\), an attention mechanism produces weights \(w_c\) over attributes. The preference score is computed by combining attributes with these weights.</p>
+        <ul>
+          <li><strong>Inputs</strong>: attribute evidences per response</li>
+          <li><strong>Mechanism</strong>: attention over attributes conditioned on community context</li>
+          <li><strong>Output</strong>: community-specific preference score and explanation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card__header"><h3>Why attention?</h3></div>
+      <div class="card__body">
+        <ul>
+          <li>Flexibly re-weights attributes per community/task</li>
+          <li>Produces interpretable importance scores</li>
+          <li>Supports dynamic adaptation when context changes</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="kpi">
+      <div class="card">
+        <div class="card__header"><h3>Performance</h3></div>
+        <div class="card__body">
+          <div class="performance-stat">
+            <div class="stat-number">46.6%</div>
+            <div class="stat-label">Avg. improvement over GPT-4o</div>
+          </div>
+          <p class="section-subtitle">Evaluated on 45 Reddit communities</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card__header"><h3>Interpretability</h3></div>
+        <div class="card__body">
+          <p>Provides <strong>attribute weight vectors</strong> per community and example-specific rationales via attention scores<span class="inline-badge">explainable</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card__header"><h3>Illustrative community weightings</h3></div>
+      <div class="card__body">
+        <div class="matrix">
+          <div class="viz-attribute">
+            <h4>Scholarly</h4>
+            <p>High: Verbosity, Stimulation</p>
+            <p>Low: Sarcasm</p>
+          </div>
+          <div class="viz-attribute">
+            <h4>Conflict-oriented</h4>
+            <p>High: Sarcasm, Directness</p>
+            <p>Low: Empathy</p>
+          </div>
+          <div class="viz-attribute">
+            <h4>Support-based</h4>
+            <p>High: Empathy</p>
+            <p>Moderate: Formality</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="backbar">
+      <a class="btn btn--outline" href="index.html?tab=method">← Back to Method</a>
+      <a class="btn btn--primary" href="index.html">Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Ensure auto-render runs after the full document is parsed
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

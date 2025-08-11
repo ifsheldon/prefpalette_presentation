@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrefPalette: Personalized Preference Modeling - Paper Presentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>PrefPalette: Personalized Preference Modeling with Latent Attributes</h1>
+            <p class="subtitle">A Framework for Community-Specific Preference Learning</p>
+            <div class="paper-meta">
+                <span class="authors">Meta FAIR, University of Washington, Meta GenAI</span>
+                <span class="publication">July 2025</span>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab active" data-tab="overview">Overview & Motivation</button>
+            <button class="tab" data-tab="method">PrefPalette Method</button>
+            <button class="tab" data-tab="findings">Key Findings</button>
+            <button class="tab" data-tab="connections">Connections to Visualization</button>
+            <button class="tab" data-tab="discussion">Discussion & Questions</button>
+        </nav>
+
+        <div class="progress-bar">
+            <div class="progress-indicator"></div>
+        </div>
+
+        <main class="content">
+            <!-- Overview & Motivation Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="section-header">
+                    <h2>Overview & Motivation</h2>
+                    <p class="section-subtitle">Understanding the relevance to visualization research</p>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="card expandable-card" data-expand="paper-intro">
+                        <div class="card__header">
+                            <h3>Paper Introduction</h3>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="card__body">
+                            <p><strong>Key Contribution:</strong> A framework that decomposes preferences into attribute dimensions and tailors prediction to distinct social community values.</p>
+                        </div>
+                        <div class="expandable-content hidden">
+                            <div class="card__body">
+                                <p>This work addresses a fundamental challenge in AI systems: understanding and modeling user preferences at a community level rather than treating all users as homogeneous.</p>
+                                <ul>
+                                    <li>Focuses on personalization through community-specific preference profiles</li>
+                                    <li>Uses latent attribute modeling to understand preference dimensions</li>
+                                    <li>Demonstrates significant improvements over existing approaches</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card expandable-card" data-expand="viz-relevance">
+                        <div class="card__header">
+                            <h3>Why This Matters for Visualization</h3>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="card__body">
+                            <p>Visualization also deals with implicit preferences and needs to consider different user groups and communities.</p>
+                        </div>
+                        <div class="expandable-content hidden">
+                            <div class="card__body">
+                                <ul>
+                                    <li><strong>Implicit Preferences:</strong> Users have unstated preferences about color, layout, complexity, and interaction patterns</li>
+                                    <li><strong>Community Differences:</strong> Different professional, cultural, and demographic groups prefer different visualization approaches</li>
+                                    <li><strong>AI-Generated Visualizations:</strong> As AI becomes more involved in visualization generation, understanding preferences becomes crucial</li>
+                                    <li><strong>Personalization Challenge:</strong> Current visualization tools often use one-size-fits-all approaches</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card expandable-card" data-expand="research-question">
+                        <div class="card__header">
+                            <h3>Research Question</h3>
+                            <span class="expand-icon">+</span>
+                        </div>
+                        <div class="card__body">
+                            <p>How can we model and predict community-specific preferences for better AI personalization?</p>
+                        </div>
+                        <div class="expandable-content hidden">
+                            <div class="card__body">
+                                <p><strong>For Visualization Context:</strong></p>
+                                <ul>
+                                    <li>How do different communities prefer their data to be visualized?</li>
+                                    <li>What are the key preference dimensions in visualization design?</li>
+                                    <li>Can we automatically adapt visualizations to community preferences?</li>
+                                    <li>How do cultural and professional backgrounds influence visualization preferences?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PrefPalette Method Tab -->
+            <div class="tab-content hidden" id="method">
+                <div class="section-header">
+                    <h2>PrefPalette Method</h2>
+                    <p class="section-subtitle">Two-stage framework for preference modeling</p>
+                </div>
+
+                <div class="method-overview">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Two-Stage Architecture</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="stage-container">
+                                <div class="stage">
+                                    <div class="stage-number">1</div>
+                                    <div class="stage-content">
+                                        <h4>Counterfactual Attribute Synthesis</h4>
+                                        <p>Generating synthetic training data to isolate individual attribute effects</p>
+                                        <a class="btn btn--sm btn--outline mt-8" href="counterfactual.html">Details →</a>
+                                    </div>
+                                </div>
+                                <div class="stage-arrow">→</div>
+                                <div class="stage">
+                                    <div class="stage-number">2</div>
+                                    <div class="stage-content">
+                                        <h4>Attention-based Preference Modeling</h4>
+                                        <p>Learns how different communities dynamically weight attributes</p>
+                                         <a class="btn btn--sm btn--outline mt-8" href="attention.html">Details →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Preference Attributes</h3>
+                        </div>
+                        <div class="card__body">
+                            <h4>Sociolinguistic Norms</h4>
+                            <div class="attribute-grid" aria-label="Sociolinguistic Norms">
+                                <div class="attribute-tag">Formality</div>
+                                <div class="attribute-tag">Verbosity</div>
+                                <div class="attribute-tag">Directness</div>
+                                <div class="attribute-tag">Assertiveness</div>
+                                <div class="attribute-tag">Supportiveness</div>
+                                <div class="attribute-tag">Politeness</div>
+                                <div class="attribute-tag">Sarcasm</div>
+                                <div class="attribute-tag">Humor</div>
+                                <div class="attribute-tag">Empathy</div>
+                            </div>
+
+                            <h4 style="margin-top: var(--space-16);">Schwartz Cultural Values</h4>
+                            <div class="attribute-grid" aria-label="Schwartz Cultural Values">
+                                <div class="attribute-tag">Self-Direction</div>
+                                <div class="attribute-tag">Stimulation</div>
+                                <div class="attribute-tag">Hedonism</div>
+                                <div class="attribute-tag">Achievement</div>
+                                <div class="attribute-tag">Power</div>
+                                <div class="attribute-tag">Security</div>
+                                <div class="attribute-tag">Conformity</div>
+                                <div class="attribute-tag">Tradition</div>
+                                <div class="attribute-tag">Benevolence</div>
+                                <div class="attribute-tag">Universalism</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Multi-Attribute Decision Making</h3>
+                        </div>
+                        <div class="card__body">
+                            <p>The framework learns to dynamically weight different attributes based on community context, allowing for nuanced preference modeling that goes beyond simple user clustering.</p>
+                            <ul>
+                                <li>Community-specific attention weights</li>
+                                <li>Dynamic attribute combination</li>
+                                <li>Contextual preference adaptation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Findings Tab -->
+            <div class="tab-content hidden" id="findings">
+                <div class="section-header">
+                    <h2>Key Findings</h2>
+                    <p class="section-subtitle">Performance results and community insights</p>
+                </div>
+
+                <div class="findings-grid">
+                    <div class="card performance-card">
+                        <div class="card__header">
+                            <h3>Performance Results</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="performance-stat">
+                                <div class="stat-number">46.6%</div>
+                                <div class="stat-label">Improvement over GPT-4o</div>
+                            </div>
+                            <div class="performance-details">
+                                <p><strong>Testing Scale:</strong> 45 communities on Reddit</p>
+                                <p><strong>Metric:</strong> Average prediction accuracy</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Community-Specific Preference Profiles</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="community-profiles">
+                                <div class="community-profile">
+                                    <h4>Scholarly Communities</h4>
+                                    <div class="preference-tags">
+                                        <span class="pref-tag verbosity">Verbosity</span>
+                                        <span class="pref-tag stimulation">Stimulation</span>
+                                    </div>
+                                </div>
+                                <div class="community-profile">
+                                    <h4>Conflict-oriented Communities</h4>
+                                    <div class="preference-tags">
+                                        <span class="pref-tag sarcasm">Sarcasm</span>
+                                        <span class="pref-tag directness">Directness</span>
+                                    </div>
+                                </div>
+                                <div class="community-profile">
+                                    <h4>Support-based Communities</h4>
+                                    <div class="preference-tags">
+                                        <span class="pref-tag empathy">Empathy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Key Insights</h3>
+                    </div>
+                    <div class="card__body">
+                        <ul>
+                            <li><strong>Community Clustering:</strong> Different communities show distinct preference patterns that can be systematically identified</li>
+                            <li><strong>Attribute Importance:</strong> The relative importance of attributes varies significantly across communities</li>
+                            <li><strong>Generalization:</strong> The framework successfully generalizes to unseen communities with similar characteristics</li>
+                            <li><strong>Interpretability:</strong> Learned preference profiles provide interpretable insights into community values</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connections to Visualization Tab -->
+            <div class="tab-content hidden" id="connections">
+                <div class="section-header">
+                    <h2>Connections to Visualization</h2>
+                    <p class="section-subtitle">Applying preference modeling to visualization design</p>
+                </div>
+
+                <div class="card">
+                    <div class="card__header">
+                        <h3>Target Audiences for Visualization</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="visualization-chart">
+                            <img src="./target_audiences_treemap.png" alt="Target Audiences for Visualization Design" class="chart-image">
+                            <p class="chart-caption">Different demographic categories requiring tailored visualization approaches</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Visualization Preference Dimensions</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="viz-attributes">
+                                <div class="viz-attribute">
+                                    <h4>Visual Complexity</h4>
+                                    <p>Experts vs. novices prefer different levels of detail</p>
+                                </div>
+                                <div class="viz-attribute">
+                                    <h4>Color Schemes</h4>
+                                    <p>Cultural and accessibility considerations</p>
+                                </div>
+                                <div class="viz-attribute">
+                                    <h4>Interaction Style</h4>
+                                    <p>Technology familiarity affects preferred interactions</p>
+                                </div>
+                                <div class="viz-attribute">
+                                    <h4>Information Density</h4>
+                                    <p>Professional context influences data presentation preferences</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Potential Applications</h3>
+                        </div>
+                        <div class="card__body">
+                            <ul>
+                                <li><strong>AI-generated visualizations</strong> tailored to user communities</li>
+                                <li><strong>Adaptive visualization systems</strong> that learn from user behavior</li>
+                                <li><strong>Personalized data dashboards</strong> for different organizational roles</li>
+                                <li><strong>Community-specific visual design patterns</strong> for different platforms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discussion & Questions Tab -->
+            <div class="tab-content hidden" id="discussion">
+                <div class="section-header">
+                    <h2>Discussion & Questions</h2>
+                    <p class="section-subtitle">Research opportunities and challenges</p>
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Research Questions for Our Group</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="question-list">
+                                <div class="question-item">
+                                    <div class="question-number">1</div>
+                                    <div class="question-content">
+                                        <h4>How can we identify preference dimensions for visualization?</h4>
+                                        <p>What are the equivalent of "formality," "humor," and "empathy" in the visualization domain?</p>
+                                    </div>
+                                </div>
+                                <div class="question-item">
+                                    <div class="question-number">2</div>
+                                    <div class="question-content">
+                                        <h4>What attributes matter most for different visualization tasks?</h4>
+                                        <p>Do preferences vary between exploratory analysis, presentation, and communication tasks?</p>
+                                    </div>
+                                </div>
+                                <div class="question-item">
+                                    <div class="question-number">3</div>
+                                    <div class="question-content">
+                                        <h4>Can we build similar preference models for visualization communities?</h4>
+                                        <p>How would we collect training data and validate community-specific preferences?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Technical Challenges</h3>
+                        </div>
+                        <div class="card__body">
+                            <ul>
+                                <li><strong>Data Collection:</strong> How do we gather implicit preference data for visualizations?</li>
+                                <li><strong>Preference Measurement:</strong> What metrics capture visualization preference satisfaction?</li>
+                                <li><strong>Community Definition:</strong> How do we define and identify visualization communities?</li>
+                                <li><strong>Generalization:</strong> Can preferences learned in one context transfer to others?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Ethical Considerations</h3>
+                        </div>
+                        <div class="card__body">
+                            <ul>
+                                <li><strong>Bias Amplification:</strong> Could personalized visualizations reinforce existing biases?</li>
+                                <li><strong>Filter Bubbles:</strong> Risk of creating isolated information experiences</li>
+                                <li><strong>Privacy:</strong> Preference data reveals personal and community characteristics</li>
+                                <li><strong>Fairness:</strong> Ensuring all communities receive high-quality visualizations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Future Research Directions</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="research-directions">
+                                <div class="direction-item">
+                                    <h4>Cross-Modal Preference Transfer</h4>
+                                    <p>Can text preferences inform visualization preferences?</p>
+                                </div>
+                                <div class="direction-item">
+                                    <h4>Multi-Stakeholder Preferences</h4>
+                                    <p>Balancing preferences when multiple communities view the same visualization</p>
+                                </div>
+                                <div class="direction-item">
+                                    <h4>Dynamic Preference Learning</h4>
+                                    <p>Adapting to changing preferences over time and context</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="navigation-controls">
+            <button class="btn btn--outline" id="prev-btn" disabled>← Previous</button>
+            <button class="btn btn--primary" id="next-btn">Next →</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
