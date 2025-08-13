@@ -786,6 +786,24 @@ select.form-control {
   border-radius: var(--radius-full);
 }
 
+.authors-line, .affiliations-line {
+  margin-top: var(--space-8);
+  font-size: var(--font-size-md);
+}
+
+.authors-line .author + .author::before {
+  content: " ";
+}
+
+.affiliations-line {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.authors-line sup, .affiliations-line sup {
+  font-size: 0.7em;
+}
+
 /* Tab Navigation */
 .tabs {
   display: flex;
